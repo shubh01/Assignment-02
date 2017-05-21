@@ -1,0 +1,72 @@
+<html>
+	<head>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+		<br>
+		<br>
+		<h1 align="center">
+			Register User:
+		</h1>
+	</head>
+	<body>
+		<table align="center">
+			<tr>
+				</tr>
+					<td>First Name:</td>
+					<td><input type="text" name="fname" placeholder="First Name" id="fname"></td>
+				</tr>
+				<tr>
+					<td>Last Name:</td>
+					<td><input type="text" name="lname" placeholder="Last Name" id="lname"></td>
+				</tr>
+				<tr>
+					<td>Company:</td>
+					<td><input type="text" name="company" placeholder="Company" id="company"></td>
+				</tr>
+				<tr>
+					<td>Email:</td>
+					<td><input type="text" name="email" placeholder="Username" id="email"></td>
+				</tr>
+				<tr>
+					<td>Password:</td>
+					<td><input type="password" name="password" placeholder="Password" id="password"></td>
+					<td><button type="button" id="submitUser">Register!</button></td>
+				</tr>
+				<tr>
+				</tr>
+			</tr>
+		</table>
+	</body>
+</html>
+<script>
+	$(document).ready(function(){
+		$("#submitUser").click(function(){
+			var person = "{";
+			person += "\"firstName\":\""+$("#fname").val()+"\",";
+			person += "\"lastName\":\""+$("#lname").val()+"\",";
+			person += "\"company\":\""+$("#company").val()+"\",";
+			person += "\"username\":\""+$("#email").val()+"\",";
+			person += "\"password\":\""+$("#password").val()+"\"";
+			person+="}";
+			
+			$("#fname").val("");
+			$("#lname").val("");
+			$("#company").val("");
+			$("#email").val("");
+			$("#password").val("");			
+
+			
+			$.ajax({
+            url: 'https://localhost:8443/zepo/rest/Unauthorize/createEntry',
+            type: 'post',
+            dataType: 'json',
+            contentType: "application/json",
+			success: function (data) {
+				alert('User Registered Successfully');
+				 setTimeout(function(){location.href="https://localhost:8443/zepo/login.jsp"} , 2000);
+            },
+            data: person
+        });
+			
+		});
+	});
+</script>

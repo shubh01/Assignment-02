@@ -1,0 +1,64 @@
+<html>
+	<head>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+		<br>
+		<br>
+		<h1 align="center">User Details</h1><
+	</head>
+	<body>
+		<table align="center">
+			<tr>
+				</tr>
+					<td>First Name:</td>
+					<td><input type="text" name="fname" id="fname" disabled></td>
+				</tr>
+				<tr>
+					<td>Last Name:</td>
+					<td><input type="text" name="lname" id="lname"  disabled></td>
+				</tr>
+				<tr>
+					<td>Company:</td>
+					<td><input type="text" name="company" id="company"  disabled></td>
+				</tr>
+				<tr>
+					<td>Email:</td>
+					<td><input type="text" name="email" id="email" disabled></td>
+				</tr>
+				<tr>
+					<td>Password:</td>
+					<td><input type="password" name="password" id="password" disabled></td>
+					<td><button type="button" onclick="location.href='https://localhost:8443/zepo/logout';">Logout</button></td>
+				</tr>
+				<tr>
+				</tr>
+			</tr>
+		</table>
+	</body>
+</html>
+<script>
+	$(document).ready(function(){
+			$("#fname").val("");
+			$("#lname").val("");
+			$("#company").val("");
+			$("#email").val("");
+			$("#password").val("");			
+			
+			$.ajax({
+            url: 'https://localhost:8443/zepo/rest/Users/getUserDetail',
+            type: 'get',
+            dataType: 'json',
+            contentType: "application/json",
+			success: function (data) {
+				console.dir(data);
+				
+			$("#fname").val(data.firstName);
+			$("#welcome").val(data.firstName);
+			$("#lname").val(data.lastName);
+			$("#company").val(data.company);
+			$("#email").val(data.username);
+			$("#password").val(data.password);			
+            }
+        });
+			
+	});
+</script>
